@@ -1,0 +1,70 @@
+{
+  "entities": {
+    "AIAppointment": {
+      "title": "AI Appointment",
+      "description": "Appointments booked through the MediCare AI Assistant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "patientName": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "age": { "type": "integer" },
+        "gender": { "type": "string" },
+        "department": { "type": "string" },
+        "doctor": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "symptoms": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string", "enum": ["Paid", "Pending"] },
+        "appointmentStatus": { "type": "string", "enum": ["Confirmed", "Pending Confirmation"] },
+        "bookingSource": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["patientName", "phone", "doctor", "date", "time"]
+    },
+    "CallbackRequest": {
+      "title": "Callback Request",
+      "description": "Requests for a callback from the clinic",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "preferredTime": { "type": "string" },
+        "reason": { "type": "string" },
+        "status": { "type": "string", "enum": ["New", "Called", "Pending", "Completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "ChatLead": {
+      "title": "Chat Lead",
+      "description": "Captured leads from interest in services",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "query": { "type": "string" },
+        "interestedService": { "type": "string" },
+        "appointmentIntent": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "ai_appointments": {
+      "schema": "AIAppointment",
+      "description": "Collection of appointments from AI chat"
+    },
+    "callback_requests": {
+      "schema": "CallbackRequest",
+      "description": "Queue for patient callbacks"
+    },
+    "chat_leads": {
+      "schema": "ChatLead",
+      "description": "Marketing and sales leads from chat"
+    }
+  }
+}

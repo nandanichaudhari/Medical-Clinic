@@ -1,0 +1,12 @@
+{
+  "name": "MediCare Plus Clinic",
+  "description": "A premium multi-specialty clinic platform featuring board-certified doctor profiles, an AI-powered healthcare assistant for intelligent bookings, and a real-time admin dashboard for managing patients and leads.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "Appointment Booking",
+    "Admin Dashboard",
+    "Payment Gateway UI"
+  ]
+}

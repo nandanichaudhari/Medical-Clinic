@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() { return request.auth != null; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    
+    // AI Appointments
+    match /ai_appointments/{appointmentId} {
+      allow create: if true; // Public creation from chatbot
+      allow read: if isSignedIn(); // Admin only (simplified for this turn)
+    }
+
+    // Callback Requests
+    match /callback_requests/{requestId} {
+      allow create: if true;
+      allow read: if isSignedIn();
+      allow update: if isSignedIn();
+    }
+
+    // Chat Leads
+    match /chat_leads/{leadId} {
+      allow create: if true;
+      allow read: if isSignedIn();
+    }
+  }
+}
